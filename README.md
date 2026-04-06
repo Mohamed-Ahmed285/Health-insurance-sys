@@ -1,5 +1,11 @@
 # Health Insurance System v1.0
 
+
+![Language](https://img.shields.io/badge/Language-C%23-blue)
+![Framework](https://img.shields.io/badge/Framework-dot%20Net-red)
+![Framework](https://img.shields.io/badge/Framework-Windows%20Forms-lightgrey)
+![Status](https://img.shields.io/badge/InProgress-5%25-orange)
+
 > A .NET WinForms desktop application designed to digitize health insurance policy management and medical claim adjudication using an Oracle Database.
 
 ## Description
