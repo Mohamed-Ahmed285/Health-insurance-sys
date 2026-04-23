@@ -1,0 +1,20 @@
+# Visual Studio hidden folder
+.vs/
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Crystal Reports specific temporary files (just in case)
+*.rpt~
+
+# Windows image caches
+Thumbs.db
+ehthumbs.db
