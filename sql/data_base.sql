@@ -28,6 +28,7 @@ CREATE TABLE Insurance_Plans (
 CREATE TABLE Patients (
     National_ID VARCHAR2(20) PRIMARY KEY, 
     Full_Name VARCHAR2(150) NOT NULL,
+    Phone VARCHAR2(20) UNIQUE NOT NULL,
     Email VARCHAR2(100) UNIQUE NOT NULL,
     Password_Hash VARCHAR2(255) NOT NULL,
     Current_Balance NUMBER(10, 2) DEFAULT 0
