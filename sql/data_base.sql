@@ -1,0 +1,67 @@
+DROP TABLE Treatments CASCADE CONSTRAINTS;
+DROP TABLE Subscriptions CASCADE CONSTRAINTS;
+DROP TABLE Patients CASCADE CONSTRAINTS;
+DROP TABLE Healthcare_Providers CASCADE CONSTRAINTS;
+DROP TABLE Insurance_Plans CASCADE CONSTRAINTS;
+DROP TABLE Admins CASCADE CONSTRAINTS;
+
+DROP SEQUENCE admin_seq;
+DROP SEQUENCE plan_seq;
+DROP SEQUENCE sub_seq;
+DROP SEQUENCE provider_seq;
+DROP SEQUENCE treat_seq;
+
+
+CREATE TABLE Admins (
+    Admin_ID NUMBER PRIMARY KEY,
+    Username VARCHAR2(50) UNIQUE NOT NULL,
+    Password_Hash VARCHAR2(255) NOT NULL
+);
+
+CREATE TABLE Insurance_Plans (
+    Plan_ID NUMBER PRIMARY KEY,
+    Plan_Name VARCHAR2(100) NOT NULL,
+    Premium_Fee NUMBER(10, 2) NOT NULL,
+    Coverage_Amount NUMBER(10, 2) NOT NULL
+);
+
+CREATE TABLE Patients (
+    National_ID VARCHAR2(20) PRIMARY KEY, 
+    Full_Name VARCHAR2(150) NOT NULL,
+    Email VARCHAR2(100) UNIQUE NOT NULL,
+    Password_Hash VARCHAR2(255) NOT NULL,
+    Current_Balance NUMBER(10, 2) DEFAULT 0
+);
+
+CREATE TABLE Subscriptions (
+    Subscription_ID NUMBER PRIMARY KEY,
+    Patient_National_ID VARCHAR2(20) NOT NULL,
+    Plan_ID NUMBER NOT NULL,
+    Payment_Date DATE DEFAULT SYSDATE,
+    Amount_Paid NUMBER(10, 2) NOT NULL,
+    CONSTRAINT fk_sub_patient FOREIGN KEY (Patient_National_ID) REFERENCES Patients(National_ID),
+    CONSTRAINT fk_sub_plan FOREIGN KEY (Plan_ID) REFERENCES Insurance_Plans(Plan_ID)
+);
+
+CREATE TABLE Healthcare_Providers (
+    Provider_ID NUMBER PRIMARY KEY,
+    Provider_Name VARCHAR2(150) NOT NULL,
+    Contact_Info VARCHAR2(255) NOT NULL
+);
+
+CREATE TABLE Treatments (
+    Treatment_ID NUMBER PRIMARY KEY,
+    Patient_National_ID VARCHAR2(20) NOT NULL,
+    Provider_ID NUMBER NOT NULL,
+    Treatment_Cost NUMBER(10, 2) NOT NULL,
+    Treatment_Date DATE DEFAULT SYSDATE,
+    CONSTRAINT fk_treat_patient FOREIGN KEY (Patient_National_ID) REFERENCES Patients(National_ID),
+    CONSTRAINT fk_treat_provider FOREIGN KEY (Provider_ID) REFERENCES Healthcare_Providers(Provider_ID)
+);
+
+
+CREATE SEQUENCE admin_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE plan_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE sub_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE provider_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE treat_seq START WITH 1 INCREMENT BY 1;
