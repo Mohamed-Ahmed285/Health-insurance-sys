@@ -16,14 +16,14 @@ namespace Health_Insurance_System {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class Coverage_Gap : ReportClass {
+    public class CoverageGap : ReportClass {
         
-        public Coverage_Gap() {
+        public CoverageGap() {
         }
         
         public override string ResourceName {
             get {
-                return "Coverage Gap.rpt";
+                return "CoverageGap.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Health_Insurance_System {
         
         public override string FullResourceName {
             get {
-                return "Health_Insurance_System.Coverage Gap.rpt";
+                return "Health_Insurance_System.CoverageGap.rpt";
             }
             set {
                 // Do nothing
@@ -103,12 +103,28 @@ namespace Health_Insurance_System {
                 return this.ReportDefinition.Sections[6];
             }
         }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_StartDate {
+            get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_EndDate {
+            get {
+                return this.DataDefinition.ParameterFields[1];
+            }
+        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedCoverage_Gap : Component, ICachedReport {
+    public class CachedCoverageGap : Component, ICachedReport {
         
-        public CachedCoverage_Gap() {
+        public CachedCoverageGap() {
         }
         
         [Browsable(false)]
@@ -145,7 +161,7 @@ namespace Health_Insurance_System {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            Coverage_Gap rpt = new Coverage_Gap();
+            CoverageGap rpt = new CoverageGap();
             rpt.Site = this.Site;
             return rpt;
         }
