@@ -21,7 +21,6 @@ namespace Health_Insurance_System
 
         // Use a reversible encrypted column in DB.
         private const string PasswordColumn = "PASSWORD_HASH";
-        // Protect this passphrase (config / DPAPI / Key Vault). DO NOT hard-code in production.
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
 
         public AdminForm()
