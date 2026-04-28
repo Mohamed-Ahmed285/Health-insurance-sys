@@ -92,5 +92,11 @@ namespace Health_Insurance_System
         {
             Sign_in_panel.SendToBack();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+
+        }
     }
 }
