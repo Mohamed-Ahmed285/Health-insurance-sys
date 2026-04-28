@@ -1,3 +1,17 @@
+-- ────────────────────────────────────────────────────────────
+--  STEP 1: Clear existing data (child tables first)
+-- ────────────────────────────────────────────────────────────
+DELETE FROM Treatments;
+DELETE FROM Subscriptions;
+DELETE FROM Patients;
+DELETE FROM Healthcare_Providers;
+DELETE FROM Insurance_Plans;
+DELETE FROM Admins;
+COMMIT;
+
+-- ────────────────────────────────────────────────────────────
+--  STEP 2: Reset sequences
+-- ────────────────────────────────────────────────────────────
 DROP SEQUENCE admin_seq;
 DROP SEQUENCE plan_seq;
 DROP SEQUENCE sub_seq;
@@ -10,6 +24,10 @@ CREATE SEQUENCE sub_seq      START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE provider_seq START WITH 1 INCREMENT BY 1;
 CREATE SEQUENCE treat_seq    START WITH 1 INCREMENT BY 1;
 
+-- ────────────────────────────────────────────────────────────
+--  STEP 3: Insert data
+-- ────────────────────────────────────────────────────────────
+
 -- ADMINS
 INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
   (admin_seq.NEXTVAL, 'superadmin',   '$2b$12$KIXx5v1J8oN3zQmWvRtLyOe9P1234567890ABCDEFGHabcdefgh01');
@@ -18,7 +36,7 @@ INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
 INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
   (admin_seq.NEXTVAL, 'support_lead', '$2b$12$USyu9x3L0qP5bSoYxTuNzQg1R1234567890ABCDEFGHabcdefgh03');
 
--- INSURANCE PLANS  (Plan_ID will be 1..5)
+-- INSURANCE PLANS  (Plan_ID: 1=Basic, 2=Standard, 3=Family, 4=Senior, 5=Elite)
 INSERT INTO Insurance_Plans (Plan_ID, Plan_Name, Premium_Fee, Coverage_Amount) VALUES
   (plan_seq.NEXTVAL, 'Basic Care',      150.00,   5000.00);
 INSERT INTO Insurance_Plans (Plan_ID, Plan_Name, Premium_Fee, Coverage_Amount) VALUES
@@ -30,7 +48,7 @@ INSERT INTO Insurance_Plans (Plan_ID, Plan_Name, Premium_Fee, Coverage_Amount) V
 INSERT INTO Insurance_Plans (Plan_ID, Plan_Name, Premium_Fee, Coverage_Amount) VALUES
   (plan_seq.NEXTVAL, 'Elite Platinum', 1200.00, 100000.00);
 
--- HEALTHCARE PROVIDERS  (Provider_ID will be 1..8)
+-- HEALTHCARE PROVIDERS  (Provider_ID: 1..8)
 INSERT INTO Healthcare_Providers (Provider_ID, Provider_Name, Contact_Info) VALUES
   (provider_seq.NEXTVAL, 'Cairo General Hospital',     'Tel: +20-2-2345-6789 | cairo-general@health.eg');
 INSERT INTO Healthcare_Providers (Provider_ID, Provider_Name, Contact_Info) VALUES
@@ -71,81 +89,77 @@ INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Curre
   ('29412100234567', 'Layla Ashraf Zaki',    '01090123456', 'layla.ashraf@outlook.com',  '$2b$12$abcAAAAAAAAAAAAAAAAAAAAuABCDEFGHIJKLMNOPQRSTUVWXYZab', 5100.00);
 
 -- SUBSCRIPTIONS
--- Plan_ID: 1=Basic Care, 2=Standard Plus, 3=Family Shield, 4=Senior Comfort, 5=Elite Platinum
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29901012345678', 2, DATE '2024-01-15',  300.00);
+  (sub_seq.NEXTVAL, '29901012345678', 2, DATE '2024-01-15',  300.00);  -- Ahmed    → Standard Plus  (covers 15,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
   (sub_seq.NEXTVAL, '29901012345678', 2, DATE '2024-07-15',  300.00);
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29805023456789', 1, DATE '2024-02-01',  150.00);
+  (sub_seq.NEXTVAL, '29805023456789', 1, DATE '2024-02-01',  150.00);  -- Fatma    → Basic Care     (covers  5,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29805023456789', 3, DATE '2025-02-01',  500.00);
+  (sub_seq.NEXTVAL, '29805023456789', 3, DATE '2025-02-01',  500.00);  -- Fatma    → Family Shield  (covers 30,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '30103034567890', 1, DATE '2024-03-10',  150.00);
+  (sub_seq.NEXTVAL, '30103034567890', 1, DATE '2024-03-10',  150.00);  -- Mohamed  → Basic Care     (covers  5,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29607045678901', 5, DATE '2024-04-01', 1200.00);
+  (sub_seq.NEXTVAL, '29607045678901', 5, DATE '2024-04-01', 1200.00);  -- Nour     → Elite Platinum (covers 100,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
   (sub_seq.NEXTVAL, '29607045678901', 5, DATE '2025-04-01', 1200.00);
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '30205056789012', 1, DATE '2024-05-20',  150.00);
+  (sub_seq.NEXTVAL, '30205056789012', 1, DATE '2024-05-20',  150.00);  -- Youssef  → Basic Care     (covers  5,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29508067890123', 3, DATE '2024-06-01',  500.00);
+  (sub_seq.NEXTVAL, '29508067890123', 2, DATE '2024-06-01',  300.00);  -- Hana     → Standard Plus  (covers 15,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '30009078901234', 2, DATE '2024-08-15',  300.00);
+  (sub_seq.NEXTVAL, '30009078901234', 2, DATE '2024-08-15',  300.00);  -- Karim    → Standard Plus  (covers 15,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29710089012345', 4, DATE '2024-09-01',  250.00);
+  (sub_seq.NEXTVAL, '29710089012345', 4, DATE '2024-09-01',  250.00);  -- Sara     → Senior Comfort (covers 20,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
   (sub_seq.NEXTVAL, '29710089012345', 4, DATE '2025-03-01',  250.00);
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '30111090123456', 2, DATE '2024-10-10',  300.00);
+  (sub_seq.NEXTVAL, '30111090123456', 2, DATE '2024-10-10',  300.00);  -- Omar     → Standard Plus  (covers 15,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29412100234567', 5, DATE '2024-11-01', 1200.00);
+  (sub_seq.NEXTVAL, '29412100234567', 5, DATE '2024-11-01', 1200.00);  -- Layla    → Elite Platinum (covers 100,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '30103034567890', 2, DATE '2025-01-10',  300.00);
+  (sub_seq.NEXTVAL, '30103034567890', 2, DATE '2025-01-10',  300.00);  -- Mohamed  → Standard Plus  (covers 15,000)
 
--- TREATMENTS
--- Provider_ID: 1=Cairo General, 2=Nile Medical, 3=Al-Salam,
---              4=Delta Ortho,   5=Giza Cardio,  6=Heliopolis Eye,
---              7=Alex Pediatric, 8=Luxor Lab
+-- Treatments
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29901012345678', 1, 3200.00, DATE '2024-03-05');
+  (treat_seq.NEXTVAL, '29901012345678', 1,  3200.00, DATE '2024-03-05');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29901012345678', 5,  850.00, DATE '2024-09-20');
+  (treat_seq.NEXTVAL, '29901012345678', 5,   850.00, DATE '2024-09-20');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29805023456789', 2,  420.00, DATE '2024-04-12');
+  (treat_seq.NEXTVAL, '29805023456789', 1,  7500.00, DATE '2024-04-12');  -- costs 7,500 > 5,000 coverage
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29805023456789', 7, 1100.00, DATE '2025-02-28');
+  (treat_seq.NEXTVAL, '29805023456789', 7,   420.00, DATE '2025-02-28');  -- routine, no gap
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30103034567890', 3,  275.00, DATE '2024-05-18');
+  (treat_seq.NEXTVAL, '30103034567890', 3,  6800.00, DATE '2024-05-18');  -- costs 6,800 > 5,000 coverage
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29607045678901', 5, 8500.00, DATE '2024-06-30');
+  (treat_seq.NEXTVAL, '30103034567890', 2,   275.00, DATE '2025-02-14');  -- routine, no gap
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29607045678901', 1, 2100.00, DATE '2024-11-14');
+  (treat_seq.NEXTVAL, '29607045678901', 5,  8500.00, DATE '2024-06-30');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30205056789012', 8,  180.00, DATE '2024-07-03');
+  (treat_seq.NEXTVAL, '29607045678901', 1,  2100.00, DATE '2024-11-14');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29508067890123', 4, 6200.00, DATE '2024-08-22');
+  (treat_seq.NEXTVAL, '29607045678901', 6,   340.00, DATE '2025-03-22');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29508067890123', 2,  950.00, DATE '2025-01-07');
+  (treat_seq.NEXTVAL, '30205056789012', 4,  9200.00, DATE '2024-07-03');  -- costs 9,200 > 5,000 coverage
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30009078901234', 6,  390.00, DATE '2024-10-01');
+  (treat_seq.NEXTVAL, '29508067890123', 4, 18500.00, DATE '2024-08-22');  -- costs 18,500 > 15,000 coverage
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29710089012345', 1, 1750.00, DATE '2024-11-25');
+  (treat_seq.NEXTVAL, '29508067890123', 2,   950.00, DATE '2025-01-07');  -- routine, no gap
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29710089012345', 8,  230.00, DATE '2025-03-15');
+  (treat_seq.NEXTVAL, '29508067890123', 5,  2250.00, DATE '2025-04-05');  -- routine, no gap
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30111090123456', 3,  560.00, DATE '2024-12-10');
+  (treat_seq.NEXTVAL, '30009078901234', 6,   390.00, DATE '2024-10-01');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29412100234567', 5, 4800.00, DATE '2025-01-30');
+  (treat_seq.NEXTVAL, '30009078901234', 1,   980.00, DATE '2025-04-18');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29412100234567', 4, 3100.00, DATE '2025-04-10');
+  (treat_seq.NEXTVAL, '29710089012345', 5, 23000.00, DATE '2024-11-25');  -- costs 23,000 > 20,000 coverage
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30103034567890', 2,  710.00, DATE '2025-02-14');
+  (treat_seq.NEXTVAL, '29710089012345', 8,   230.00, DATE '2025-03-15');  -- routine, no gap
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29607045678901', 6,  340.00, DATE '2025-03-22');
+  (treat_seq.NEXTVAL, '30111090123456', 3,   560.00, DATE '2024-12-10');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '29508067890123', 5, 2250.00, DATE '2025-04-05');
+  (treat_seq.NEXTVAL, '29412100234567', 5,  4800.00, DATE '2025-01-30');
 INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatment_Cost, Treatment_Date) VALUES
-  (treat_seq.NEXTVAL, '30009078901234', 1,  980.00, DATE '2025-04-18');
+  (treat_seq.NEXTVAL, '29412100234567', 4,  3100.00, DATE '2025-04-10');
 
 COMMIT;
