@@ -15,7 +15,7 @@ namespace Health_Insurance_System
     {
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
 
-        private const string ConnectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=orcl)));User Id=HealthAdmin;Password=mypassword;";
+        private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
 
         public Login()
         {
@@ -115,7 +115,7 @@ namespace Health_Insurance_System
                 using (var cmd = conn.CreateCommand())
                 {
                     conn.Open();
-                    cmd.CommandText = "SELECT  PASSWORD_HASH, National_ID FROM PATIENTS WHERE EMAIL = :email";
+                    cmd.CommandText = "SELECT PASSWORD_HASH FROM PATIENTS WHERE EMAIL = :email";
                     cmd.Parameters.Add(new OracleParameter("email", OracleDbType.Varchar2, email, ParameterDirection.Input));
 
                     using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
@@ -125,7 +125,7 @@ namespace Health_Insurance_System
                             MessageBox.Show("Invalid email or password.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
-                        string nationalID = rdr["National_ID"].ToString();
+
                         var storedEnc = rdr.IsDBNull(0) ? null : rdr.GetString(0);
                         if (string.IsNullOrEmpty(storedEnc))
                         {
@@ -148,7 +148,7 @@ namespace Health_Insurance_System
                         if (string.Equals(password, storedPlain, StringComparison.Ordinal))
                         {
                             this.Hide();
-                            using (var admin = new UserForm(nationalID))
+                            using (var admin = new UserForm())
                             {
                                 admin.ShowDialog();
                             }
