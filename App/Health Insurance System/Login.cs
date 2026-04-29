@@ -14,7 +14,6 @@ namespace Health_Insurance_System
     public partial class Login : Form
     {
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
-
         private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
 
         public Login()
@@ -115,7 +114,7 @@ namespace Health_Insurance_System
                 using (var cmd = conn.CreateCommand())
                 {
                     conn.Open();
-                    cmd.CommandText = "SELECT PASSWORD_HASH FROM PATIENTS WHERE EMAIL = :email";
+                    cmd.CommandText = "SELECT PASSWORD_HASH, NATIONAL_ID FROM PATIENTS WHERE EMAIL = :email";
                     cmd.Parameters.Add(new OracleParameter("email", OracleDbType.Varchar2, email, ParameterDirection.Input));
 
                     using (var rdr = cmd.ExecuteReader(CommandBehavior.SingleRow))
@@ -127,6 +126,7 @@ namespace Health_Insurance_System
                         }
 
                         var storedEnc = rdr.IsDBNull(0) ? null : rdr.GetString(0);
+                        string id = rdr.IsDBNull(1) ? string.Empty : rdr.GetString(1);
                         if (string.IsNullOrEmpty(storedEnc))
                         {
                             MessageBox.Show("Account has no stored password.", "Authentication Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -148,7 +148,7 @@ namespace Health_Insurance_System
                         if (string.Equals(password, storedPlain, StringComparison.Ordinal))
                         {
                             this.Hide();
-                            using (var admin = new UserForm())
+                            using (var admin = new UserForm(id))
                             {
                                 admin.ShowDialog();
                             }
@@ -217,7 +217,6 @@ namespace Health_Insurance_System
                     if (rows > 0)
                     {
                         MessageBox.Show("Registration successful.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        // Optionally switch to sign-in panel
                         Sign_in_panel.BringToFront();
                     }
                     else
@@ -236,9 +235,11 @@ namespace Health_Insurance_System
 
         private void button3_Click(object sender, EventArgs e)
         {
-            // Close the login form so control returns to the Main form that opened it.
-            // When Main shows the Login with ShowDialog() and hides itself, closing
-            // this form will return execution to Main which can call Show() again.
+            this.Close();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
             this.Close();
         }
     }

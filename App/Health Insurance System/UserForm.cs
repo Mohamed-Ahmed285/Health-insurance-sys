@@ -12,10 +12,13 @@ namespace Health_Insurance_System
 {
     public partial class UserForm : Form
     {
+        private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
+        string loggedInUserNationalID = null;
         private Button activeButton = null;
-        public UserForm()
+        public UserForm(String id)
         {
             InitializeComponent();
+            this.loggedInUserNationalID = id;
         }
         //GUI Code 
         //nav bar color chnage 

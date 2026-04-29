@@ -30,7 +30,6 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.Dashboard_panel = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
             this.Add_Admin_Panel = new System.Windows.Forms.Panel();
             this.Load_Data = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -41,7 +40,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.Dashboard_panel.SuspendLayout();
             this.Add_Admin_Panel.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -67,22 +65,11 @@
             // 
             // Dashboard_panel
             // 
-            this.Dashboard_panel.Controls.Add(this.label13);
             this.Dashboard_panel.Location = new System.Drawing.Point(15, 76);
             this.Dashboard_panel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dashboard_panel.Name = "Dashboard_panel";
             this.Dashboard_panel.Size = new System.Drawing.Size(956, 521);
             this.Dashboard_panel.TabIndex = 1;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Tahoma", 20F);
-            this.label13.Location = new System.Drawing.Point(314, 97);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(259, 33);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "crystal report is here";
             // 
             // Add_Admin_Panel
             // 
@@ -96,6 +83,7 @@
             this.Add_Admin_Panel.Name = "Add_Admin_Panel";
             this.Add_Admin_Panel.Size = new System.Drawing.Size(957, 531);
             this.Add_Admin_Panel.TabIndex = 2;
+            this.Add_Admin_Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Add_Admin_Panel_Paint);
             // 
             // Load_Data
             // 
@@ -233,8 +221,6 @@
             this.Name = "AdminForm";
             this.Text = "AdminForm";
             this.Load += new System.EventHandler(this.AdminForm_Load);
-            this.Dashboard_panel.ResumeLayout(false);
-            this.Dashboard_panel.PerformLayout();
             this.Add_Admin_Panel.ResumeLayout(false);
             this.Add_Admin_Panel.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -253,7 +239,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton rdo_Hospitals;

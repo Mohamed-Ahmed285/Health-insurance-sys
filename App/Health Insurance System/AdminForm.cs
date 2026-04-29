@@ -166,5 +166,10 @@ namespace Health_Insurance_System
             // After login window is closed, close admin form to end or continue application flow.
             this.Close();
         }
+
+        private void Add_Admin_Panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
