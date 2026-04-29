@@ -1,4 +1,4 @@
-﻿namespace Health_Insurance_System
+namespace Health_Insurance_System
 {
     partial class AdminForm
     {
@@ -35,6 +35,8 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.Add_Hospital_Panel = new System.Windows.Forms.Panel();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.txtHospitalName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -132,8 +134,10 @@
             // 
             // Add_Hospital_Panel
             // 
-            this.Add_Hospital_Panel.Controls.Add(this.dataGridView1);
             this.Add_Hospital_Panel.Controls.Add(this.button6);
+            this.Add_Hospital_Panel.Controls.Add(this.dataGridView1);
+            this.Add_Hospital_Panel.Controls.Add(this.txtAddress);
+            this.Add_Hospital_Panel.Controls.Add(this.txtHospitalName);
             this.Add_Hospital_Panel.Controls.Add(this.label6);
             this.Add_Hospital_Panel.Location = new System.Drawing.Point(0, 83);
             this.Add_Hospital_Panel.Name = "Add_Hospital_Panel";
@@ -150,6 +154,20 @@
             this.label6.Size = new System.Drawing.Size(319, 41);
             this.label6.TabIndex = 0;
             this.label6.Text = "Add New Hospital";
+            // 
+            // txtHospitalName
+            // 
+            this.txtHospitalName.Location = new System.Drawing.Point(41, 65);
+            this.txtHospitalName.Name = "txtHospitalName";
+            this.txtHospitalName.Size = new System.Drawing.Size(500, 24);
+            this.txtHospitalName.TabIndex = 9;
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(41, 100);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(500, 24);
+            this.txtAddress.TabIndex = 10;
             // 
             // button3
             // 
@@ -200,15 +218,16 @@
             this.button8.TabIndex = 5;
             this.button8.Text = "Logout";
             this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(41, 83);
+            this.dataGridView1.Location = new System.Drawing.Point(41, 135);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 26;
-            this.dataGridView1.Size = new System.Drawing.Size(1046, 342);
+            this.dataGridView1.Size = new System.Drawing.Size(1046, 290);
             this.dataGridView1.TabIndex = 8;
             // 
             // label13
@@ -269,6 +288,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel Add_Hospital_Panel;
+        private System.Windows.Forms.TextBox txtHospitalName;
+        private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button6;

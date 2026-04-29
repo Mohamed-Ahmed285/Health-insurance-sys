@@ -1,17 +1,19 @@
-﻿using System;
+using Oracle.ManagedDataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace Health_Insurance_System
 {
     public partial class Login : Form
     {
+        string connString = "User Id=system;Password=123;Data Source=localhost:1521/orcl";
         public Login()
         {
             InitializeComponent();
@@ -44,15 +46,21 @@ namespace Health_Insurance_System
                 }
             };
         }
-        // unfocus from textbox
+       
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
-            label4.Focus();   // move focus away from textboxes
+            label4.Focus();   
         }
         private void Form1_Load(object sender, EventArgs e)
         {
             Sign_up_panel.SendToBack();
+        }
+
+        private void linkAdminPortal_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new AdminForm().Show();
+            this.Hide();
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -88,6 +96,57 @@ namespace Health_Insurance_System
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            
+            string email = textBox1.Text.Trim();
+            string pass = textBox2.Text.Trim();
+            if (email == "Enter your email" || string.IsNullOrWhiteSpace(email) ||
+                pass == "Enter your password" || string.IsNullOrWhiteSpace(pass))
+            {
+                MessageBox.Show("يرجى إدخال البريد وكلمة المرور.");
+                return;
+            }
+            
+            using (OracleConnection con = new OracleConnection(connString))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "SELECT FULL_NAME, NATIONAL_ID FROM Patients WHERE Email = :email AND Password_Hash = :pass";
+                    using (OracleCommand cmd = new OracleCommand(query, con))
+                    {
+                        cmd.Parameters.Add(new OracleParameter("email", email));
+                        cmd.Parameters.Add(new OracleParameter("pass", pass));
+                        using (OracleDataReader dr = cmd.ExecuteReader())
+                        {
+                            if (dr.Read())
+                            {
+                                MessageBox.Show("تم تسجيل الدخول بنجاح! أهلاً يا " + dr["Full_Name"]);
+                                string id = dr["NATIONAL_ID"].ToString();
+                                UserForm userPage = new UserForm(id);
+                                userPage.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("بيانات الدخول غير صحيحة");
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في الاتصال: " + ex.Message);
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

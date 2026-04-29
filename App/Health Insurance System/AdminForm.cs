@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client;
 
 namespace Health_Insurance_System
 {
@@ -70,7 +71,6 @@ namespace Health_Insurance_System
 
         private void button3_Click(object sender, EventArgs e)
         {
-          
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -80,7 +80,35 @@ namespace Health_Insurance_System
 
         private void button6_Click(object sender, EventArgs e)
         {
-          
+            try
+            {
+                using (OracleConnection con = new OracleConnection("User Id=system;Password=123;Data Source=localhost:1521/orcl"))
+                {
+                    con.Open();
+                    MessageBox.Show("الكونكشن حديد يا مؤمن! متصل بأوراكل");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("في مشكلة في اللينك: " + ex.Message);
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form is Login loginForm && !loginForm.IsDisposed)
+                {
+                    loginForm.Show();
+                    this.Hide();
+                    return;
+                }
+            }
+
+            Login login = new Login();
+            login.Show();
+            this.Hide();
         }
 
         private void button7_Click(object sender, EventArgs e)
