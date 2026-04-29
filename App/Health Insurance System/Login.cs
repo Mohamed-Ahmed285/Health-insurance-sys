@@ -14,6 +14,8 @@ namespace Health_Insurance_System
     public partial class Login : Form
     {
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
+     
+
         private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
 
         public Login()

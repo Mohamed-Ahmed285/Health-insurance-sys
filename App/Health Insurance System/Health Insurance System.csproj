@@ -68,7 +68,19 @@
       <DependentUpon>CoverageGapReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CoverageGapReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CoverageGapReportForm.Designer.cs">
+      <DependentUpon>CoverageGapReportForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CryptoHelper.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,15 +99,17 @@
       <DependentUpon>CoverageGap.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.cs" />
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="HospitalForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HospitalForm.Designer.cs">
       <DependentUpon>HospitalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PlanAmountSummaryReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PlanAmountSummaryReportForm.Designer.cs">
+      <DependentUpon>PlanAmountSummaryReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -112,6 +126,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CoverageGapReport.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CoverageGapReportForm.resx">
+      <DependentUpon>CoverageGapReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,11 +139,11 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PlanAmountSummary.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="HospitalForm.resx">
       <DependentUpon>HospitalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PlanAmountSummaryReportForm.resx">
+      <DependentUpon>PlanAmountSummaryReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
