@@ -142,7 +142,7 @@ using System.Xml.Linq;
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("مشكلة في الحفظ: " + ex.Message);
+                        MessageBox.Show("Erorr in save" + ex.Message);
                     }
                 }
             }
