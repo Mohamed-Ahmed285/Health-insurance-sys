@@ -58,6 +58,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.Sign_in_panel.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -89,6 +90,7 @@
             // Sign_in_panel
             // 
             this.Sign_in_panel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(241)))), ((int)(((byte)(255)))));
+            this.Sign_in_panel.Controls.Add(this.button3);
             this.Sign_in_panel.Controls.Add(this.panel1);
             this.Sign_in_panel.Controls.Add(this.pictureBox2);
             this.Sign_in_panel.Controls.Add(this.pictureBox1);
@@ -398,13 +400,26 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "NEW ACCOUNT";
             // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button3.Location = new System.Drawing.Point(847, 9);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(65, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Go Back";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 596);
-            this.Controls.Add(this.Sign_up_panel);
             this.Controls.Add(this.Sign_in_panel);
+            this.Controls.Add(this.Sign_up_panel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Login";
             this.Text = "Health Insurance System";
@@ -453,6 +468,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

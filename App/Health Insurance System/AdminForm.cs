@@ -162,14 +162,7 @@ namespace Health_Insurance_System
 
         private void button8_Click(object sender, EventArgs e)
         {
-
-            // Ensure LoginForm exists in the project. This hides current admin UI and shows login.
-            this.Hide();
-            using (var login = new Login())
-            {
-                // ShowDialog keeps the application alive while login is displayed.
-                login.ShowDialog();
-            }
+          
             // After login window is closed, close admin form to end or continue application flow.
             this.Close();
         }

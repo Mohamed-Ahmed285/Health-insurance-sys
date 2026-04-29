@@ -234,5 +234,12 @@ namespace Health_Insurance_System
 
         private void rdo_actors_CheckedChanged(object sender, EventArgs e) { }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // Close the login form so control returns to the Main form that opened it.
+            // When Main shows the Login with ShowDialog() and hides itself, closing
+            // this form will return execution to Main which can call Show() again.
+            this.Close();
+        }
     }
 }

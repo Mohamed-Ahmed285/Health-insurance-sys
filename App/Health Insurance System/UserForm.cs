@@ -77,7 +77,7 @@ namespace Health_Insurance_System
 
         private void button6_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
