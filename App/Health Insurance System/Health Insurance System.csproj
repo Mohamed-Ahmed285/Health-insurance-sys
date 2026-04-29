@@ -62,17 +62,17 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CoverageGapReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CoverageGapReportForm.Designer.cs">
-      <DependentUpon>CoverageGapReportForm.cs</DependentUpon>
+    <Compile Include="CoverageGapReport.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CoverageGapReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="CryptoHelper.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Main.Designer.cs">
+    <Compile Include="Main.designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
     <Compile Include="PlanAmountSummary.cs">
@@ -87,23 +87,15 @@
       <DependentUpon>CoverageGap.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Login.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="Form1.cs" />
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="HospitalForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HospitalForm.Designer.cs">
       <DependentUpon>HospitalForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="PlanAmountSummaryReportForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlanAmountSummaryReportForm.Designer.cs">
-      <DependentUpon>PlanAmountSummaryReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,8 +108,9 @@
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CoverageGapReportForm.resx">
-      <DependentUpon>CoverageGapReportForm.cs</DependentUpon>
+    <EmbeddedResource Include="CoverageGapReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CoverageGapReport.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -126,14 +119,11 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PlanAmountSummary.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HospitalForm.resx">
       <DependentUpon>HospitalForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlanAmountSummaryReportForm.resx">
-      <DependentUpon>PlanAmountSummaryReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

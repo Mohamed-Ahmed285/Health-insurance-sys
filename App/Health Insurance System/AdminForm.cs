@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using CrystalDecisions.Shared;
 
 namespace Health_Insurance_System
 {
@@ -18,6 +19,9 @@ namespace Health_Insurance_System
         OracleDataAdapter adapter;
         OracleCommandBuilder builder;
         DataSet ds;
+
+        PlanAmountSummary pas;
+        CoverageGapReport coverageGap;
 
         // Use a reversible encrypted column in DB.
         private const string PasswordColumn = "PASSWORD_HASH";
@@ -34,6 +38,9 @@ namespace Health_Insurance_System
 
             SetActiveButton(button1);
             Dashboard_panel.BringToFront();
+
+            pas = new PlanAmountSummary();
+            coverageGap = new CoverageGapReport();
 
         }
 
@@ -170,6 +177,22 @@ namespace Health_Insurance_System
         private void Add_Admin_Panel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            if (CoverageGapReport_rdo.Checked)
+            {
+                coverageGap.SetParameterValue(0, StartDatePicker.Value);
+                coverageGap.SetParameterValue(1, EndDatePicker.Value);
+                crystalReportViewer.ReportSource = coverageGap;
+            }
+            else if (PlanAmountSumReport_rdo.Checked)
+            {
+                pas.SetParameterValue(0, StartDatePicker.Value);
+                pas.SetParameterValue(1, EndDatePicker.Value);
+                crystalReportViewer.ReportSource = pas;
+            }
         }
     }
 }
