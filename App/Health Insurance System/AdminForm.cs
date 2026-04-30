@@ -90,7 +90,7 @@ namespace Health_Insurance_System
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string constr = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
+            string constr = "User Id = scott; Password =tiger; Data Source = orcl";
             string cmdstr = "";
 
             if (rdo_admins.Checked)

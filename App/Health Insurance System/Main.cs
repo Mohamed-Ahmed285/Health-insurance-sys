@@ -45,7 +45,7 @@ namespace Health_Insurance_System
 
             btnUserPanel = new Button
             {
-                Text = "User Panel",
+                Text = "Login Panel",
                 Size = new Size(340, 36),
                 Location = new Point(40, 64)
             };
@@ -61,7 +61,7 @@ namespace Health_Insurance_System
 
             btnHealthProviderPanel = new Button
             {
-                Text = "Health Provider Panel",
+                Text = "User Panel",
                 Size = new Size(340, 36),
                 Location = new Point(40, 148)
             };
@@ -100,7 +100,7 @@ namespace Health_Insurance_System
         private void BtnHealthProviderPanel_Click(object sender, EventArgs e)
         {
             // Show HospitalForm (create one if missing)
-            using (var hospital = new HospitalForm())
+            using (var hospital = new UserForm("29901012345678"))
             {
                 this.Hide();
                 hospital.StartPosition = FormStartPosition.CenterScreen;

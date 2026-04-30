@@ -16,7 +16,7 @@ namespace Health_Insurance_System
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
      
 
-        private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
+        private const string ConnectionString = "User Id = scott; Password =tiger; Data Source = orcl";
 
         public Login()
         {

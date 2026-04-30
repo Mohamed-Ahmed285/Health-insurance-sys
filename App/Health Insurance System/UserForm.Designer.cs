@@ -49,6 +49,12 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.Profile_panel = new System.Windows.Forms.Panel();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,12 +65,6 @@
             this.button7 = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
             this.Balance_panel.SuspendLayout();
             this.Plans_panel.SuspendLayout();
             this.Profile_panel.SuspendLayout();
@@ -134,6 +134,7 @@
             this.Balance_panel.Name = "Balance_panel";
             this.Balance_panel.Size = new System.Drawing.Size(947, 546);
             this.Balance_panel.TabIndex = 3;
+            this.Balance_panel.Paint += new System.Windows.Forms.PaintEventHandler(this.Balance_panel_Paint);
             // 
             // label2
             // 
@@ -336,6 +337,72 @@
             this.Profile_panel.Size = new System.Drawing.Size(959, 561);
             this.Profile_panel.TabIndex = 5;
             // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
+            this.label23.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label23.Location = new System.Drawing.Point(476, 403);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(146, 28);
+            this.label23.TabIndex = 15;
+            this.label23.Text = "National ID";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
+            this.label22.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label22.Location = new System.Drawing.Point(476, 343);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(158, 28);
+            this.label22.TabIndex = 14;
+            this.label22.Text = "User\'s Name";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
+            this.label21.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label21.Location = new System.Drawing.Point(476, 272);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(158, 28);
+            this.label21.TabIndex = 13;
+            this.label21.Text = "User\'s Name";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
+            this.label20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label20.Location = new System.Drawing.Point(476, 209);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(158, 28);
+            this.label20.TabIndex = 12;
+            this.label20.Text = "User\'s Name";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
+            this.label19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label19.Location = new System.Drawing.Point(476, 143);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(158, 28);
+            this.label19.TabIndex = 11;
+            this.label19.Text = "User\'s Name";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Tahoma", 23F, System.Drawing.FontStyle.Bold);
+            this.label4.ForeColor = System.Drawing.Color.Beige;
+            this.label4.Location = new System.Drawing.Point(147, 38);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(203, 37);
+            this.label4.TabIndex = 10;
+            this.label4.Text = "Profile Page";
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -461,72 +528,6 @@
             this.label3.Text = "Your Current Plan ";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Tahoma", 23F, System.Drawing.FontStyle.Bold);
-            this.label4.ForeColor = System.Drawing.Color.Beige;
-            this.label4.Location = new System.Drawing.Point(147, 38);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(203, 37);
-            this.label4.TabIndex = 10;
-            this.label4.Text = "Profile Page";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
-            this.label19.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label19.Location = new System.Drawing.Point(476, 143);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(158, 28);
-            this.label19.TabIndex = 11;
-            this.label19.Text = "User\'s Name";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
-            this.label20.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label20.Location = new System.Drawing.Point(476, 209);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(158, 28);
-            this.label20.TabIndex = 12;
-            this.label20.Text = "User\'s Name";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
-            this.label21.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label21.Location = new System.Drawing.Point(476, 272);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(158, 28);
-            this.label21.TabIndex = 13;
-            this.label21.Text = "User\'s Name";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
-            this.label22.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label22.Location = new System.Drawing.Point(476, 343);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(158, 28);
-            this.label22.TabIndex = 14;
-            this.label22.Text = "User\'s Name";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Tahoma", 17F, System.Drawing.FontStyle.Bold);
-            this.label23.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label23.Location = new System.Drawing.Point(476, 403);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(146, 28);
-            this.label23.TabIndex = 15;
-            this.label23.Text = "National ID";
-            // 
             // UserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -537,10 +538,10 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.Profile_panel);
             this.Controls.Add(this.subscribe_plan);
             this.Controls.Add(this.Plans_panel);
             this.Controls.Add(this.Balance_panel);
+            this.Controls.Add(this.Profile_panel);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserForm";
             this.Text = "UserForm";

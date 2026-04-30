@@ -1,3 +1,73 @@
+DROP TABLE Treatments CASCADE CONSTRAINTS;
+DROP TABLE Subscriptions CASCADE CONSTRAINTS;
+DROP TABLE Patients CASCADE CONSTRAINTS;
+DROP TABLE Healthcare_Providers CASCADE CONSTRAINTS;
+DROP TABLE Insurance_Plans CASCADE CONSTRAINTS;
+DROP TABLE Admins CASCADE CONSTRAINTS;
+
+DROP SEQUENCE admin_seq;
+DROP SEQUENCE plan_seq;
+DROP SEQUENCE sub_seq;
+DROP SEQUENCE provider_seq;
+DROP SEQUENCE treat_seq;
+
+
+CREATE TABLE Admins (
+    Admin_ID NUMBER PRIMARY KEY,
+    Username VARCHAR2(50) UNIQUE NOT NULL,
+    Password_Hash VARCHAR2(255) NOT NULL
+);
+
+CREATE TABLE Insurance_Plans (
+    Plan_ID NUMBER PRIMARY KEY,
+    Plan_Name VARCHAR2(100) NOT NULL,
+    Premium_Fee NUMBER(10, 2) NOT NULL,
+    Coverage_Amount NUMBER(10, 2) NOT NULL
+);
+
+CREATE TABLE Patients (
+    National_ID VARCHAR2(20) PRIMARY KEY, 
+    Full_Name VARCHAR2(150) NOT NULL,
+    Phone VARCHAR2(20) UNIQUE NOT NULL,
+    Email VARCHAR2(100) UNIQUE NOT NULL,
+    Password_Hash VARCHAR2(255) NOT NULL,
+    Current_Balance NUMBER(10, 2) DEFAULT 0
+);
+
+CREATE TABLE Subscriptions (
+    Subscription_ID NUMBER PRIMARY KEY,
+    Patient_National_ID VARCHAR2(20) NOT NULL,
+    Plan_ID NUMBER NOT NULL,
+    Payment_Date DATE DEFAULT SYSDATE,
+    Amount_Paid NUMBER(10, 2) NOT NULL,
+    CONSTRAINT fk_sub_patient FOREIGN KEY (Patient_National_ID) REFERENCES Patients(National_ID),
+    CONSTRAINT fk_sub_plan FOREIGN KEY (Plan_ID) REFERENCES Insurance_Plans(Plan_ID)
+);
+
+CREATE TABLE Healthcare_Providers (
+    Provider_ID NUMBER PRIMARY KEY,
+    Provider_Name VARCHAR2(150) NOT NULL,
+    Contact_Info VARCHAR2(255) NOT NULL
+);
+
+CREATE TABLE Treatments (
+    Treatment_ID NUMBER PRIMARY KEY,
+    Patient_National_ID VARCHAR2(20) NOT NULL,
+    Provider_ID NUMBER NOT NULL,
+    Treatment_Cost NUMBER(10, 2) NOT NULL,
+    Treatment_Date DATE DEFAULT SYSDATE,
+    CONSTRAINT fk_treat_patient FOREIGN KEY (Patient_National_ID) REFERENCES Patients(National_ID),
+    CONSTRAINT fk_treat_provider FOREIGN KEY (Provider_ID) REFERENCES Healthcare_Providers(Provider_ID)
+);
+
+
+CREATE SEQUENCE admin_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE plan_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE sub_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE provider_seq START WITH 1 INCREMENT BY 1;
+CREATE SEQUENCE treat_seq START WITH 1 INCREMENT BY 1;
+
+
 -- ────────────────────────────────────────────────────────────
 --  STEP 1: Clear existing data (child tables first)
 -- ────────────────────────────────────────────────────────────
@@ -30,11 +100,11 @@ CREATE SEQUENCE treat_seq    START WITH 1 INCREMENT BY 1;
 
 -- ADMINS
 INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
-  (admin_seq.NEXTVAL, 'superadmin',   '$2b$12$KIXx5v1J8oN3zQmWvRtLyOe9P1234567890ABCDEFGHabcdefgh01');
+  (admin_seq.NEXTVAL, 'superadmin',   'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=');
 INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
-  (admin_seq.NEXTVAL, 'ops_manager',  '$2b$12$TRxt8w2K9pO4aRnXwStMyPf0Q1234567890ABCDEFGHabcdefgh02');
+  (admin_seq.NEXTVAL, 'ops_manager',  'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=');
 INSERT INTO Admins (Admin_ID, Username, Password_Hash) VALUES
-  (admin_seq.NEXTVAL, 'support_lead', '$2b$12$USyu9x3L0qP5bSoYxTuNzQg1R1234567890ABCDEFGHabcdefgh03');
+  (admin_seq.NEXTVAL, 'support_lead', 'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=');
 
 -- INSURANCE PLANS  (Plan_ID: 1=Basic, 2=Standard, 3=Family, 4=Senior, 5=Elite)
 INSERT INTO Insurance_Plans (Plan_ID, Plan_Name, Premium_Fee, Coverage_Amount) VALUES
@@ -68,31 +138,27 @@ INSERT INTO Healthcare_Providers (Provider_ID, Provider_Name, Contact_Info) VALU
 
 -- PATIENTS
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29901012345678', 'Ahmed Hassan Mostafa', '01001234567', 'ahmed.hassan@gmail.com',    '$2b$12$abc1111111111111111111uABCDEFGHIJKLMNOPQRSTUVWXYZab', 2500.00);
+  ('29901012345678', 'Ahmed Hassan Mostafa', '01001234567', 'ahmed.hassan@gmail.com',    'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 2500.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29805023456789', 'Fatma Ibrahim Ali',    '01112345678', 'fatma.ibrahim@yahoo.com',   '$2b$12$abc2222222222222222222uABCDEFGHIJKLMNOPQRSTUVWXYZab', 1800.50);
+  ('29805023456789', 'Fatma Ibrahim Ali',    '01112345678', 'fatma.ibrahim@yahoo.com',   'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 1800.50);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('30103034567890', 'Mohamed Samir Khalil', '01223456789', 'mohamed.samir@outlook.com', '$2b$12$abc3333333333333333333uABCDEFGHIJKLMNOPQRSTUVWXYZab',  950.00);
+  ('30103034567890', 'Mohamed Samir Khalil', '01223456789', 'mohamed.samir@outlook.com', 'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=',  950.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29607045678901', 'Nour Abdel Rahman',    '01034567890', 'nour.ar@gmail.com',         '$2b$12$abc4444444444444444444uABCDEFGHIJKLMNOPQRSTUVWXYZab', 4200.75);
+  ('29607045678901', 'Nour Abdel Rahman',    '01034567890', 'nour.ar@gmail.com',         'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 4200.75);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('30205056789012', 'Youssef Adel Mansour', '01145678901', 'youssef.adel@gmail.com',    '$2b$12$abc5555555555555555555uABCDEFGHIJKLMNOPQRSTUVWXYZab',  300.00);
+  ('30205056789012', 'Youssef Adel Mansour', '01145678901', 'youssef.adel@gmail.com',    'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=',  300.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29508067890123', 'Hana Gamal Fouad',     '01256789012', 'hana.gamal@hotmail.com',    '$2b$12$abc6666666666666666666uABCDEFGHIJKLMNOPQRSTUVWXYZab', 7500.00);
+  ('29508067890123', 'Hana Gamal Fouad',     '01256789012', 'hana.gamal@hotmail.com',    'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 7500.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('30009078901234', 'Karim Tarek Nasser',   '01067890123', 'karim.tarek@gmail.com',     '$2b$12$abc7777777777777777777uABCDEFGHIJKLMNOPQRSTUVWXYZab', 1150.25);
+  ('30009078901234', 'Karim Tarek Nasser',   '01067890123', 'karim.tarek@gmail.com',     'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 1150.25);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29710089012345', 'Sara Magdy Younis',    '01178901234', 'sara.magdy@yahoo.com',      '$2b$12$abc8888888888888888888uABCDEFGHIJKLMNOPQRSTUVWXYZab', 3300.00);
+  ('29710089012345', 'Sara Magdy Younis',    '01178901234', 'sara.magdy@yahoo.com',      'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 3300.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('30111090123456', 'Omar Khaled Barakat',  '01289012345', 'omar.khaled@gmail.com',     '$2b$12$abc9999999999999999999uABCDEFGHIJKLMNOPQRSTUVWXYZab',  620.00);
+  ('30111090123456', 'Omar Khaled Barakat',  '01289012345', 'omar.khaled@gmail.com',     'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=',  620.00);
 INSERT INTO Patients (National_ID, Full_Name, Phone, Email, Password_Hash, Current_Balance) VALUES
-  ('29412100234567', 'Layla Ashraf Zaki',    '01090123456', 'layla.ashraf@outlook.com',  '$2b$12$abcAAAAAAAAAAAAAAAAAAAAuABCDEFGHIJKLMNOPQRSTUVWXYZab', 5100.00);
+  ('29412100234567', 'Layla Ashraf Zaki',    '01090123456', 'layla.ashraf@outlook.com',  'SM60v5DWWeJRjme5YBuZZD9eLYtMVTlupmuKMbRjt1Q=', 5100.00);
 
 -- SUBSCRIPTIONS
-INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29901012345678', 2, DATE '2024-01-15',  300.00);  -- Ahmed    → Standard Plus  (covers 15,000)
-INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
-  (sub_seq.NEXTVAL, '29901012345678', 2, DATE '2024-07-15',  300.00);
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
   (sub_seq.NEXTVAL, '29805023456789', 1, DATE '2024-02-01',  150.00);  -- Fatma    → Basic Care     (covers  5,000)
 INSERT INTO Subscriptions (Subscription_ID, Patient_National_ID, Plan_ID, Payment_Date, Amount_Paid) VALUES
@@ -163,3 +229,62 @@ INSERT INTO Treatments (Treatment_ID, Patient_National_ID, Provider_ID, Treatmen
   (treat_seq.NEXTVAL, '29412100234567', 4,  3100.00, DATE '2025-04-10');
 
 COMMIT;
+-- Procedures
+
+CREATE OR REPLACE PROCEDURE GET_INSURANCE_PLANS (p_cursor OUT SYS_REFCURSOR) AS
+BEGIN
+  OPEN p_cursor FOR
+    SELECT
+      PLAN_ID,
+      PLAN_NAME,
+      PREMIUM_FEE,
+      COVERAGE_AMOUNT
+    FROM INSURANCE_PLANS
+    ORDER BY PLAN_NAME;
+END GET_INSURANCE_PLANS;
+/
+
+----------------------------
+
+CREATE OR REPLACE PROCEDURE GET_PATIENT_PROFILE (
+  p_nid       IN  VARCHAR2,
+  p_full_name OUT VARCHAR2,
+  p_email     OUT VARCHAR2,
+  p_phone     OUT VARCHAR2,
+  p_password  OUT VARCHAR2,
+  p_balance   OUT NUMBER
+) AS
+BEGIN
+  SELECT FULL_NAME,
+         EMAIL,
+         PHONE,
+         PASSWORD_HASH,
+         NVL(CURRENT_BALANCE, 0)
+    INTO p_full_name,
+         p_email,
+         p_phone,
+         p_password,
+         p_balance
+    FROM PATIENTS
+   WHERE NATIONAL_ID = p_nid;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    p_full_name := NULL;
+    p_email := NULL;
+    p_phone := NULL;
+    p_password := NULL;
+    p_balance := 0;
+END GET_PATIENT_PROFILE;
+/
+
+---------------------------
+
+CREATE OR REPLACE PROCEDURE GET_SUBSCRIPTION_ID (p_next OUT NUMBER) AS
+BEGIN
+  SELECT NVL(MAX(SUBSCRIPTION_ID), 0) + 1
+    INTO p_next
+    FROM SUBSCRIPTIONS;
+END GET_SUBSCRIPTION_ID;
+/
+
+

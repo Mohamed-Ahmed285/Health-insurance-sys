@@ -99,12 +99,6 @@
       <DependentUpon>CoverageGap.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="HospitalForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HospitalForm.Designer.cs">
-      <DependentUpon>HospitalForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="PlanAmountSummaryReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,9 +132,6 @@
     <EmbeddedResource Include="PlanAmountSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>PlanAmountSummary.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="HospitalForm.resx">
-      <DependentUpon>HospitalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlanAmountSummaryReportForm.resx">
       <DependentUpon>PlanAmountSummaryReportForm.cs</DependentUpon>

@@ -16,8 +16,7 @@ namespace Health_Insurance_System
     public partial class UserForm : Form
     {
         private const string EncryptionPassphrase = "ReplaceWithStrongPassphrase";
-
-        private const string ConnectionString = "User Id = HealthAdmin; Password =mypassword; Data Source = orcl";
+        private const string ConnectionString = "User Id = scott; Password =tiger; Data Source = orcl";
         string loggedInUserNationalID = null;
         decimal loggedInUserBalance = 0m;
         private Button activeButton = null;
@@ -332,6 +331,7 @@ namespace Health_Insurance_System
                         // refresh balance shown in UI
                         loggedInUserBalance = GetUserBalance();
                         label2.Text = $"${loggedInUserBalance:F2}";
+                        label3.Text = "Your Current Plan ";
                         subscribe_plan.BringToFront();
                         label15.Text = $"${item.Name:F2}";
 
@@ -450,5 +450,9 @@ namespace Health_Insurance_System
             }
         }
 
+        private void Balance_panel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
